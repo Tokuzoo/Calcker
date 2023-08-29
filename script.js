@@ -6,7 +6,7 @@ const $toggle_btn = document.getElementById("toggle_btn");
 
 $disp_page.classList.add("hidden");
 
-const problems_count = 10;
+const problems_count = 5;
 
 for(let i=0; i<problems_count; i++){
     let p = document.createElement("p");
@@ -39,7 +39,7 @@ let ans = new Array(10), problems = new Array(10), num = new Array(10);
 for(let i=0; i<10; i++) num[i] = '(' + (i+1) + ')';
 
 const create_problem = function(level, type, idx){
-    let a = get_random(10, 999), b = get_random(10, 999);
+    let a = get_random(10, 999), b = get_random(10, 999), c = get_random(10, 20), d = get_random(10, 20);
 
     if(type === 0){
         ans[idx] = a + b;
@@ -50,10 +50,15 @@ const create_problem = function(level, type, idx){
         ans[idx] = a - b;
         problems[idx] = "\\(" + a + '-' + b + "\\)";
     }
+
+    if(type === 2){
+        ans[idx] = c * d;
+        problems[idx] = "\\(" + c + '・' + d + "\\)";
+    }
 }
 
-for(let i=0; i<10; i++){
-    create_problem(null, get_random(0, 1), i);
+for(let i=0; i<problems_count; i++){
+    create_problem(null, get_random(0, 2), i);
     $problems_disp[i].textContent = num[i] + ' ' + problems[i];
     $ans_disp[i].textContent = num[i] + ' ' + ans[i];
     $ans_disp[i].classList.add("hidden");
@@ -62,7 +67,7 @@ for(let i=0; i<10; i++){
 is_ans_disped = false;
 
 const toggle_disp = function(){
-    for(let i=0; i<10; i++){
+    for(let i=0; i<problems_count; i++){
         $problems_disp[i].classList.toggle("hidden");
         $ans_disp[i].classList.toggle("hidden");
     }
