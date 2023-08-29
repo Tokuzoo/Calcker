@@ -34,9 +34,11 @@ const get_random = function(min, max){
     return random;
 }
 
-let ans = new Array(10), problems = new Array(10), num = new Array(10);
+let ans = new Array(10), problems = new Array(10);
 
-for(let i=0; i<10; i++) num[i] = '(' + (i+1) + ')';
+const disp_handler = function(idx, statement){
+    return '(' + (idx+1) + ')' + ' ' + statement;
+}
 
 const create_problem = function(level, type, idx){
     let a = get_random(10, 999), b = get_random(10, 999), c = get_random(10, 20), d = get_random(10, 20);
@@ -59,8 +61,8 @@ const create_problem = function(level, type, idx){
 
 for(let i=0; i<problems_count; i++){
     create_problem(null, get_random(0, 2), i);
-    $problems_disp[i].textContent = num[i] + ' ' + problems[i];
-    $ans_disp[i].textContent = num[i] + ' ' + ans[i];
+    $problems_disp[i].textContent = disp_handler(i, problems[i]);
+    $ans_disp[i].textContent = disp_handler(i, ans[i]);
     $ans_disp[i].classList.add("hidden");
 }
 
